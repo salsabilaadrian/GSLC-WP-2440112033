@@ -17,9 +17,17 @@ Route::get('/', function () {
     return view('loginuser');
 });
 
-Route::get('auth/google', [App\Http\Controllers\GoogleController::class,'redirectToGoogle'])->name('google.login');
-Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class,'handleGoogleCallback'])->name('google.callback');
+Route::get('auth/google', [App\Http\Controllers\LoginController::class,'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [App\Http\Controllers\LoginController::class,'handleGoogleCallback'])->name('google.callback');
+
+Route::get('auth/facebook', [App\Http\Controllers\LoginController::class,'redirectToFacebook'])->name('facebook.login');
+Route::get('auth/facebook/callback', [App\Http\Controllers\LoginController::class,'handleFacebookCallback'])->name('facebook.callback');
+
+Route::post('/regisuser', [App\Http\Controllers\LoginController::class,'regisuser'])->name('regisuser');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
